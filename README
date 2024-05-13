@@ -1,0 +1,36 @@
+/Sistema que permita facturar productos perecibles/ 
+
+/Modelo
+
+Producto    | class
+Estado      | enum(Bueno, Por Expirar, Expirado)
+
+Persona     | class
+Cuenta      | class
+
+/Requerimientos
+
+* Ingresar datos :check
+* Iniciar sesion :check
+* Listar productos buenos 
+* Listar productos por expirar 
+* Listar productos expirados
+* Actualizar los estados del producto :check
+* Bajar productos caducados del stock
+
+
+/Restricciones
+
+*Estados
+
+Bueno -> Por Caducar -> Caducado
+
+*5 dias antes de caducar
+
+Bueno -> Por caducar
+
+*Autenticar al usuario para poder ingresar datos
+
+*Usar tokens
+
+
