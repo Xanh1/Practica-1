@@ -29,8 +29,3 @@ def login():
     return make_response(jsonify(respuesta), respuesta['code'])
     
 
-@route_persona.route('/show')
-@token_required
-def show():
-    
-    return make_response(jsonify({'msg': 'posi'}), 200)
