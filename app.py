@@ -22,7 +22,6 @@ def create_app():
         app.register_blueprint(route_producto)
         
         init()
-        
         # create db tables
         Base.create_all()
     
