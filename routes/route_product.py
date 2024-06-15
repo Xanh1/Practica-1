@@ -32,7 +32,7 @@ def create_batch():
     
     return make_response(jsonify(response), response['code'])
 
-@url_product.route('/stock')
+@url_product.route('/stock', methods = ['GET'])
 def stock():
     
     response = ctl_product.get_stock()
@@ -40,9 +40,16 @@ def stock():
     return make_response(jsonify(response), response['code'])
 
 
-@url_product.route('/stock/<status>')
+@url_product.route('/stock/<status>',methods = ['GET'])
 def get_products(status):
     
     response = ctl_product.get_stock_by_status(status = status)
     
+    return make_response(jsonify(response), response['code'])
+
+@url_product.route('/status', methods = ['GET'])
+def get_status():
+
+    response = ctl_product.get_status()
+
     return make_response(jsonify(response), response['code'])

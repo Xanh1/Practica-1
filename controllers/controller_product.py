@@ -29,6 +29,12 @@ class ControllerProduct():
 
         return json_response('OK', 200, [product.serialize for product in products])
     
+    def get_status(self):
+
+        status = [status.value for status in ProductStatus]
+
+        return json_response('OK', 200, status)
+
     
     def update_batches(self):
         

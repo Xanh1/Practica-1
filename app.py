@@ -23,7 +23,7 @@ def create_app():
         
         init()
         # create db tables
-        Base.create_all()
+        #Base.create_all()
         #Base.drop_all()
     
     return app
