@@ -2,25 +2,27 @@ import enum
 
 class Error(enum.Enum):
     
-    # Error Tokens
-    TOKEN_INEXISTENTE = 'El Token no existe'
-    TOKEN_INVALIDO = 'El token es invalido'
+    # Token errors
+    NON_EXIST_TOKEN = 'Token does not exist'
+    INVALID_TOKEN = 'Token is invalid'
     
-    # Error cuenta
-    CUENTA_INEXISTENTE = 'La cuenta no existe'
-    CUENTA_INVALIDA = 'La cuenta es invalida'
-    EMAIL_EXISTENTE = 'El email ya existe'
+    # Account errors
+    USER_EXIST = 'Username already exists'
+    NON_EXISTS_ACCOUNT = 'Username or Password is not valid'
     
-    # Error persona
-    DNI_EXISTENTE = 'El dni ya existe'
+    # Person errors
+    DNI_EXISTS = 'Dni already exists'
+    EMAIL_EXISTS = 'Email already exists'
+    NON_EXIST_PERSON = 'Person does not exist'
 
-    # Error Producto
-    PRODUCTO_EXISTENTE = 'El producto ya existe'
-    PRODUCTO_INEXISTENTE = 'El producto no existe'
+    # Product errors
+    PRODUCT_EXISTS = 'Product already exists'
+    NON_EXIST_PRODUCT = 'Product does not exist'
 
 
-def json_error(error, status_code):
-    return {'msg'  : 'Error',
-            'code' : status_code,
-            'info' : error,
+def json_response(msg, code, context):
+    return {
+        'msg'  : msg,
+        'code' : code,
+        'context' : context,
     }

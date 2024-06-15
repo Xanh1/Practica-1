@@ -1,23 +1,23 @@
-schema_crear_persona = {
+schema_create_person = {
     "type": "object",
-    "required": ["dni", "nombre", "apellido", "email", "clave"],
+    "required": ["dni", "name", "last-name", "username", "password"],
     "properties": {
         "dni": {
             "type": "string",
             "minLength": 10,
             "maxLength": 10
         },
-        "nombre": {
+        "name": {
             "type": "string"
         },
-        "apellido": {
+        "last-name": {
             "type": "string"
         },
-        "email": {
+        "username": {
             "type": "string",
             "format": "email"
         },
-        "clave": {
+        "password": {
             "type": "string"
         }
     }
@@ -26,46 +26,46 @@ schema_crear_persona = {
 
 schema_login = {
     "type": "object",
-    "required" : ["email", "clave"],
+    "required" : ["username", "password"],
     "properties": {
-        "email" : {
+        "username" : {
             "type" : "string"
         },
-        "clave" : {
+        "password" : {
             "type" : "string"
         }
     }
 }
 
 
-schema_crear_producto = {
+schema_create_product = {
     "type": "object",
-    "required" : ["nombre", "descripcion"],
+    "required" : ["name", "description"],
     "properties": {
-        "nombre" : {
+        "name" : {
             "type" : "string"
         },
-        "descripcion" : {
+        "description" : {
             "type" : "string"
         }
     }
 }
 
-schema_agregar_lote = {
+schema_create_batch = {
     "type": "object",
-    "required" : ["producto", "precio", "cantidad", "fecha_exp"],
+    "required" : ["product", "price", "stock", "exp_date"],
     "properties": {
-        "producto" : {
+        "product" : {
             "type" : "string"
         },
-        "precio" : {
+        "price" : {
             "type" : "number",
             "format" : "double"
         },
-        "cantidad" : {
+        "stock" : {
             "type" : "integer"
         },
-        "fecha_exp" : {
+        "exp_date" : {
             "type" : "string"
         }
     }

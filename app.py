@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
 pymysql.install_as_MySQLdb()
-from tablas import init
+from init_base import init
 
 Base = SQLAlchemy()
 
@@ -15,14 +15,15 @@ def create_app():
     Base.init_app(app)
     
     with app.app_context():
-        from routes.url_persona import route_persona
-        from routes.url_producto import route_producto
+        from routes.route_person import url_person
+        from routes.route_product import url_product
         
-        app.register_blueprint(route_persona)
-        app.register_blueprint(route_producto)
+        app.register_blueprint(url_person)
+        app.register_blueprint(url_product)
         
         init()
         # create db tables
         Base.create_all()
+        #Base.drop_all()
     
     return app
