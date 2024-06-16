@@ -8,7 +8,7 @@ class Error(enum.Enum):
     
     # Account errors
     USER_EXIST = 'Username already exists'
-    NON_EXISTS_ACCOUNT = 'Username or Password is not valid'
+    NON_EXISTS_ACCOUNT = 'Username or Password is wrong'
     
     # Person errors
     DNI_EXISTS = 'Dni already exists'
