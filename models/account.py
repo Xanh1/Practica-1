@@ -11,6 +11,7 @@ class Account(Base.Model):
     uid       = Base.Column(Base.String(60), default = str(uuid.uuid4()), nullable = False)
     username  = Base.Column(Base.String(255), nullable = False, unique = True)
     password  = Base.Column(Base.String(50), nullable = False)
+    avatar    = Base.Column(Base.String(255), nullable = True)
     person_id = Base.Column(Base.Integer, Base.ForeignKey('people.id'), nullable = False, unique = True)
     
     # parents relationships

@@ -15,12 +15,17 @@ class ControllerProduct():
         
         for lote in Batch.query.all():
             
-            if lote.estado != ProductStatus.EXPIRED:
+            if lote.status != ProductStatus.EXPIRED:
                 stock.append(lote)
         
         return json_response('OK', 200, [batch.serialize for batch in stock])
     
-    
+    def get_products(self):
+
+        products = Product.query.all()
+
+        return json_response('OK', 200, [product.serialize for product in products])
+
     def get_stock_by_status(self, status):
 
         self.update_batches()
@@ -42,7 +47,7 @@ class ControllerProduct():
         
         for batch in batches:
             
-            batch.actualizar_estado()
+            batch.update_status()
             
             Base.session.commit()
 
@@ -68,8 +73,7 @@ class ControllerProduct():
     
     def create_batch(self, values):
         
-        
-        product = Product.query.filter_by(uid = values['product']).first()
+        product = Product.query.filter_by(name = values['product']).first()
         
         if not product:
             return json_response('ERROR', 200, Error.NON_EXIST_PRODUCT.value)

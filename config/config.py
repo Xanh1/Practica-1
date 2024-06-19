@@ -10,6 +10,7 @@ class Config:
     # config
     FLASK_APP = environ.get('FLASK_APP')
     FLASK_ENV = environ.get('FLASK_ENV')
+    FLASK_MEDIA = environ.get('MEDIA_UPLOAD')
     
     # Keys
     SECRET_KEY = environ.get('SECRET_KEY')

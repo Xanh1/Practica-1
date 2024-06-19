@@ -28,14 +28,14 @@ class Batch(Base.Model):
     def serialize(self):
         return {
             'uid'      : self.uid,
-            'product' : self.product.name,
+            'product'  : self.product.name,
             'price'    : self.price,
             'stock'    : self.stock,
             'exp_date' : self.exp_date,
             'status'   : self.status.value,
         }
     
-    def actualizar_estado(self):
+    def update_status(self):
         
         current_date = date.today()
         

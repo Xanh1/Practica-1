@@ -31,3 +31,11 @@ def sign_in():
     return make_response(jsonify(response), response['code'])
     
 
+@url_person.route('/upload-avatar', methods=['POST'])
+def upload_avatar_user():
+
+    files = request.files
+
+    response = ctl_account.upload_avatar(files = files)
+
+    return make_response(jsonify(response), response['code'])

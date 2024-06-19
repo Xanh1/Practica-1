@@ -1,11 +1,16 @@
 from models.account import Account
 
 from .util.error import Error, json_response
-from datetime import datetime, timedelta
+
 from flask import current_app
+from werkzeug.utils import secure_filename
 
 from app import Base
 import jwt
+
+import uuid
+import os
+from datetime import datetime, timedelta
 
 class ControllerAccount():
 
@@ -41,7 +46,26 @@ class ControllerAccount():
         )
 
         
-        return json_response('OK', 200, {'token': token, 'person': account.person.name })
+        return json_response('OK', 200, {'token': token, 'person': account.person.name, 'account': account.uid })
+
+    def upload_avatar(self, files):
+
+        account = Account.query.filter_by(uid = files['user']).first()
+
+        if not account:
+            return json_response('ERROR', 200, Error.NON_EXISTS_ACCOUNT.value)
+        
+        file = files['file']
+
+        avatar = str(uuid.uuid1()) + '_' + secure_filename(file.filename)
+
+        file.save(os.path.join(current_app.config['FLASK_MEDIA'], avatar))
+
+        account.avatar = avatar
+
+        Base.session.commit()
+
+        return json_response('OK', 200, 'Avatar uploaded successfully')
 
 
     def username_exist(self, username):
