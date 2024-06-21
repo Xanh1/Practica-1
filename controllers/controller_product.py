@@ -20,6 +20,12 @@ class ControllerProduct():
         
         return json_response('OK', 200, [batch.serialize for batch in stock])
     
+    def get_product_by_uid(self, uid):
+
+        product = Product.query.filter_by(uid = uid).first()
+
+        return json_response('OK', 200, product.serialize)
+
     def get_products(self):
 
         products = Product.query.all()
@@ -71,6 +77,22 @@ class ControllerProduct():
         
         return json_response('OK', 200, 'Product created successfully')
     
+    def update_product(self, values):
+
+        product = Product.query.filter_by(uid = values['uid']).first()
+
+        name = Product.query.filter_by(name = values['name']).first()
+        
+        if name and product.name != name.name:
+            return json_response('ERROR', 200, Error.PRODUCT_EXISTS.value)
+        
+        product.name = values['name']
+        product.description = values['description']
+
+        Base.session.commit()
+
+        return json_response('OK', 200, 'Product updated successfully')
+    
     def create_batch(self, values):
         
         product = Product.query.filter_by(name = values['product']).first()
@@ -89,3 +111,28 @@ class ControllerProduct():
         Base.session.commit()
         
         return json_response('OK', 200, 'Batch created successsfully')
+
+    
+    def update_batch(self, values):
+        
+        product = Product.query.filter_by(name = values['product']).first()
+        
+        if not product:
+            return json_response('ERROR', 200, Error.NON_EXIST_PRODUCT.value)
+        
+        batch = Batch.query.filter_by(uid = values['batch']).first()
+        
+        batch.product = product
+        batch.price = values['price']
+        batch.stock = values['stock']
+        batch.exp_date = values['exp_date']
+        
+        Base.session.commit()
+        
+        return json_response('OK', 200, 'Batch updated successfully')
+        
+    def get_batch_by_uid(self, uid):
+        
+        batch = Batch.query.filter_by(uid = uid).first()
+        
+        return json_response('OK', 200, batch.serialize)

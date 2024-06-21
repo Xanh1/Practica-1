@@ -46,11 +46,11 @@ class ControllerAccount():
         )
 
         
-        return json_response('OK', 200, {'token': token, 'person': account.person.name, 'account': account.uid })
+        return json_response('OK', 200, {'token': token, 'account': account.uid })
 
-    def upload_avatar(self, files):
+    def upload_avatar(self, files, uid):
 
-        account = Account.query.filter_by(uid = files['user']).first()
+        account = Account.query.filter_by(uid = uid).first()
 
         if not account:
             return json_response('ERROR', 200, Error.NON_EXISTS_ACCOUNT.value)
@@ -67,6 +67,17 @@ class ControllerAccount():
 
         return json_response('OK', 200, 'Avatar uploaded successfully')
 
+    def get_avatar(self, uid):
+        
+        account = Account.query.filter_by(uid = uid).first()
+        
+        return json_response('OK', 200, account.avatar)       
+    
+    def get_account(self, uid):
+        
+        account = Account.query.filter_by(uid = uid).first()
+        
+        return json_response('OK', 200, account.serialize)
 
     def username_exist(self, username):
         return self.get_by_username(username = username) is not None

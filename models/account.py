@@ -23,7 +23,9 @@ class Account(Base.Model):
     @property
     def serialize(self):
         return {
-            'uid'   : self.uid,
-            'username' : self.username,
-            'password' : self.password,
+            'uid'       : self.uid,
+            'username'  : self.username,
+            'password'  : self.password,
+            'name'      : self.person.name,
+            'last_name' : self.person.last_name,
         }

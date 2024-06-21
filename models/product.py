@@ -24,7 +24,7 @@ class Product(Base.Model):
         return {
             'uid'        : self.uid,
             'name'       : self.name,
-            'decription' : self.description,
+            'description' : self.description,
         }
 
     

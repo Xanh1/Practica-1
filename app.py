@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -9,6 +10,8 @@ Base = SQLAlchemy()
 def create_app():
     app = Flask(__name__, instance_relative_config = False)
 
+    CORS(app)
+    
     #TODO
     app.config.from_object('config.config.Config')
     
@@ -23,7 +26,7 @@ def create_app():
         
         init()
         # create db tables
-        #Base.create_all()
+        Base.create_all()
         #Base.drop_all()
     
     return app

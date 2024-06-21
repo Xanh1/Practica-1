@@ -51,10 +51,49 @@ schema_create_product = {
     }
 }
 
+schema_update_product = {
+    "type": "object",
+    "required" : ["uid", "name", "description"],
+    "properties": {
+        "uid": {
+            "type" : "string"
+        },
+        "name" : {
+            "type" : "string"
+        },
+        "description" : {
+            "type" : "string"
+        }
+    }
+}
+
 schema_create_batch = {
     "type": "object",
     "required" : ["product", "price", "stock", "exp_date"],
     "properties": {
+        "product" : {
+            "type" : "string"
+        },
+        "price" : {
+            "type" : "number",
+            "format" : "double"
+        },
+        "stock" : {
+            "type" : "integer"
+        },
+        "exp_date" : {
+            "type" : "string"
+        }
+    }
+}
+
+schema_update_batch = {
+    "type": "object",
+    "required" : ["batch", "product", "price", "stock", "exp_date"],
+    "properties": {
+        "batch": {
+          "type" : "string"  
+        },
         "product" : {
             "type" : "string"
         },
